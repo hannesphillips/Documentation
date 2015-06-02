@@ -1,19 +1,19 @@
 #Pipe System Call
 Documentation on the pipe. This call is used to create a data path in which communication between processes can occur. There are `pipe()` and `pipe2()` sys calls.
 
-#Pipe
-##Inclusion
+##Pipe
+###Inclusion
 `#include <fcntl.h>`
 
 `#include <unistd.h>`
 
-##Declaration
+###Declaration
 `int pipe(int pipefd[2]);`
 
-##Return Value
+###Return Value
 Returns 0 on success. If an error occurs, -1 is returned and errno is set.
 
-#Pipe2
+##Pipe2
 Contains identical includes and return values. The key difference is that pipe2 has an extra parameter, int flags that affect the behaviour of the call.
 
 `int pipe2(int pipefd[2], int flags);`
@@ -29,7 +29,7 @@ The array pipefd[2] returns 2 file descriptors linking the ends of the pipe, or 
 
 Pipe is a key call in performing any operations where multiple processes need to communicate with each other. This is essential for I/O redirection. A basic operation, shown in the man pipe page, to provide rough understanding is the output to standard out in the child process from data in the parent.
 
-Example:
+###Example:
 
 The steps are setting up the pipefd[2] array, getting the data to output, creating the pipe, creating the child process, closing unused ends, reading data from one to end to the other for output, and lastly closing the pipe and child.
 
@@ -39,15 +39,19 @@ The steps are setting up the pipefd[2] array, getting the data to output, creati
 
 `char buf;`
 
-`if(argc != 2) {
-	fprintf(stderr, "Usage: %s <string>\n", argv[0]);
-	exit(1);
+`if(argc != 2) {`
+
+	`fprintf(stderr, "Usage: %s <string>\n", argv[0]);`
+	`exit(1);`
 }`
 
-`if(pipe(pipefd) == -1) {		// Creates and error checks the pipe
-	perror("pipe");
-	exit(1);
-}`
+`if(pipe(pipefd) == -1) {		// Creates and error checks the pipe`
+
+	`perror("pipe");`	
+	
+	`exit(1);`
+
+`}`
 
 `child = fork();`
 
@@ -56,8 +60,9 @@ The steps are setting up the pipefd[2] array, getting the data to output, creati
 	exit(1);
 }`
 
-`if(child == 0) {
-	close(pipefd[1];		// Closes unused write end
+`if(child == 0) {`
+
+	`close(pipefd[1];		// Closes unused write end`
 
 	while(read(pipefd[0], &buf, 1) > 0)
 		write(STDOUT_FILENO, &buf, 1);
