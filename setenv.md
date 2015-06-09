@@ -38,21 +38,21 @@
 
 Example 1: This example shows what happens when the overwrite paramater is a non-zero and v_name has a value.
 
-    ppath = getenv("PWD"); //gets the value of $PWD
-    if(ppath == NULL)
+    ppath = getenv("PWD");                  //puts the environment of $PWD into ppath
+    if(ppath == NULL)                       //error checking
+      perror("getenv");   
+    cout << "$PWD = " << ppath << endl;     //prints the environment of $PWD 
+    
+    ppath = getenv("HOME");                 //gets the environment of the $HOME
+    if(ppath == NULL)                       //error checking
       perror("getenv");
-    cout << "$PWD = " << ppath << endl;
+    cout << "$HOME = " << ppath << endl;    //prints the environment of $PWD
     
-    ppath = getenv("HOME"); //gets the value of the $HOME
-    if(ppath == NULL)
-      perror("getenv");
-    cout << "$HOME = " << ppath << endl;
+    if(-1==setenv("PWD",ppath,1))           //since the overwrite paramater is non-zero it replaces environment of
+      perror("setenv");                     //$PWD with the value of ppath which is defined by the environment of $HOME
     
-    if(-1==setenv("PWD",ppath,1)) //since the overwrite paramater is non-zero it replaces value of
-            cout << "error";                  //$PWD with the value of pPath which is defined as $HOME
-    
-    ppath = getenv("PWD");  //gets the value of $PWD
-    if(ppath == NULL)
+    ppath = getenv("PWD");                  //gets the environment of $PWD
+    if(ppath == NULL)                       //error checking
       perror("getenv");
     cout << "$PWD = " << ppath << endl;     //the value should now be the same as the value of $HOME
   
@@ -64,20 +64,20 @@ Output 1:
 
 Example 2: This example shows what happens when the overwrite paramater is a non-zero and v_name does not have a value.
 
-    ppath = getenv("PWD");          //puts the value of $PWD into pPath
+    ppath = getenv("PWD");                  
     if(ppath == NULL)
       perror("getenv");
-    cout << "$PWD = " << ppath  << endl;
+    cout << "$PWD = " << ppath  << endl;    //in this case ppath ="" because the environment of $PWD is not set
     
-    ppath = getenv("HOME"); //gets the value of the $HOME
+    ppath = getenv("HOME"); 
     if(ppath == NULL)
       perror("getenv");
     cout << "$HOME = " << ppath << endl;
     
-    if(-1==setenv("PWD",ppath,1)) //since the overwrite paramater is non-zero it replaces value of
-            cout << "error";                  //$PWD with the value of pPath which is defined as $HOME
+    if(-1==setenv("PWD",ppath,1))           //since the overwrite paramater is non-zero it replaces environment of
+      perror("setenv");                     //$PWD with the value of ppath which is defined by the environment of $HOME 
     
-    ppath = getenv("PWD");  //gets the value of $PWD
+    ppath = getenv("PWD");                  
     if(ppath == NULL)
       perror("getenv");  
     cout << "$PWD = " << ppath << endl;     //the value should now be the same as the value of $HOME
@@ -90,23 +90,23 @@ Output 2:
 
 Example 3: This example shows what happens when the overwrite paramater is a zero and v_name does have a value.
 
-    ppath = getenv("PWD"); //gets the value of $PWD
+    ppath = getenv("PWD"); 
     if(ppath == NULL)
       perror("getenv");
     cout << "$PWD = " << ppath << endl;
     
-    ppath = getenv("HOME"); //gets the value of the $HOME
+    ppath = getenv("HOME"); 
     if(ppath == NULL)
       perror("getenv");
     cout << "$HOME = " << ppath << endl;
     
-    if(-1==setenv("PWD",ppath,0)) //since the overwrite paramater is non-zero it replaces value of
-            cout << "error";                  //$PWD with the value of pPath which is defined as $HOME
+    if(-1==setenv("PWD",ppath,0))           //since the overwrite paramater is zero it does not replaces environment of $PWD 
+      perror("setenv");                     //with ppath.
     
-    ppath = getenv("PWD");  //gets the value of $PWD
+    ppath = getenv("PWD");                
     if(ppath == NULL)
       perror("getenv");
-    cout << "$PWD = " << ppath << endl;     //the value should now be the same as the value of $HOME
+    cout << "$PWD = " << ppath << endl;     //the value should not be changed.
 
 Output 3:
 
@@ -118,14 +118,16 @@ Output 3:
 
 Example 4: This example shows what happens when the overwrite paramater is a zero *or* a non-zero and v_name is a paramater that is not defined in the environment.
 
-    ppath = getenv("HOME"); //gets the value of the $HOME
+    ppath = getenv("HOME"); 
     if(ppath == NULL)
       perror("getenv");
     cout << "$HOME = " << ppath << endl;
 
-    if(-1==setenv("random_name",ppath,0)) //since the overwrite paramater is non-zero it replaces value of
-            cout << "error";                  //$PWD with the value of pPath which is defined as $HOME
-
+    if(-1==setenv("random_name",ppath,0))   //since the overwrite paramater is zero and the the variable $random_name is    
+    perror("setenv");                       //undefined, setenv makes the environment of $random_variable be the value of
+                                            //ppath. If the case where there is a undefined variable the setenv behavous the
+                                            //same way regardless of a non-zero or zero overwrite paramater. 
+                                            
     ppath = getenv("random_name");  //gets the value of $PWD
     if(ppath == NULL)
       perror("getenv");
@@ -133,6 +135,5 @@ Example 4: This example shows what happens when the overwrite paramater is a zer
 
 Output 4:
 
-    $random_name = 
     $HOME = /class/classes/dchou002
     $random_name = /class/classes/dchou002
