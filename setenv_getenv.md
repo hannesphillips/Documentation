@@ -59,9 +59,9 @@ Example 1: This example shows what happens when the overwrite paramater is a non
   
 Output 1:
 
-    $PWD = /class/classes/dchou002/CS100
-    $HOME = /class/classes/dchou002
-    $PWD = /class/classes/dchou002
+    $PWD = /class/classes/username/CS100
+    $HOME = /class/classes/username
+    $PWD = /class/classes/username
 
 Example 2: This example shows what happens when the overwrite paramater is a non-zero and v_name does not have a value.
 
@@ -87,8 +87,8 @@ Example 2: This example shows what happens when the overwrite paramater is a non
 Output 2:
 
     $PWD =
-    $HOME = /class/classes/dchou002
-    $PWD = /class/classes/dchou002
+    $HOME = /class/classes/username
+    $PWD = /class/classes/username
 
 Example 3: This example shows what happens when the overwrite paramater is a zero and v_name does have a value.
 
@@ -112,9 +112,9 @@ Example 3: This example shows what happens when the overwrite paramater is a zer
 
 Output 3:
 
-    $PWD = /class/classes/dchou002/CS100
-    $HOME = /class/classes/dchou002
-    $PWD = /class/classes/dchou002/CS100
+    $PWD = /class/classes/username/CS100
+    $HOME = /class/classes/username
+    $PWD = /class/classes/username/CS100
 
 ///////////////////////////////////////////
 
@@ -138,5 +138,5 @@ Example 4: This example shows what happens when the overwrite paramater is a zer
 
 Output 4:
 
-    $HOME = /class/classes/dchou002
-    $random_name = /class/classes/dchou002
+    $HOME = /class/classes/username
+    $random_name = /class/classes/username
