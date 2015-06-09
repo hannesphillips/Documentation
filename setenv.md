@@ -1,6 +1,6 @@
 ##setenv:
 
-[man page](http://linux.die.net/man/3/setenv)
+[man page - setenv](http://linux.die.net/man/3/setenv)
 
 **includes:** `#include <stdlib.h>`
 
@@ -22,6 +22,16 @@
 - If v_name is defined and exists, the value of v_name is *not* changed to the v_value. 
 - If v_name was previously undefined, it is given the value of v_value. 
 
+##setenv:
+
+[man page - getenv](http://linux.die.net/man/3/getenv)
+
+**includes:** `#include <stdlib.h>`
+
+char *getenv(const char *name);
+
+**returns:**  If successful returns a pointer to the value in the environment, or NULL if there is no match.
+
 **Examples**
 
 ``char *ppath`` is used as a variable in the following examples.
@@ -29,15 +39,21 @@
 Example 1: This example shows what happens when the overwrite paramater is a non-zero and v_name has a value.
 
     ppath = getenv("PWD"); //gets the value of $PWD
+    if(ppath == NULL)
+      perror("getenv");
     cout << "$PWD = " << ppath << endl;
     
     ppath = getenv("HOME"); //gets the value of the $HOME
+    if(ppath == NULL)
+      perror("getenv");
     cout << "$HOME = " << ppath << endl;
     
     if(-1==setenv("PWD",ppath,1)) //since the overwrite paramater is non-zero it replaces value of
             cout << "error";                  //$PWD with the value of pPath which is defined as $HOME
     
     ppath = getenv("PWD");  //gets the value of $PWD
+    if(ppath == NULL)
+      perror("getenv");
     cout << "$PWD = " << ppath << endl;     //the value should now be the same as the value of $HOME
   
 Output 1:
@@ -48,19 +64,22 @@ Output 1:
 
 Example 2: This example shows what happens when the overwrite paramater is a non-zero and v_name does not have a value.
 
-    if(-1==setenv("PWD","",1))      //makes the value of $PWD = ""
-            cout << "error";
-    
     ppath = getenv("PWD");          //puts the value of $PWD into pPath
+    if(ppath == NULL)
+      perror("getenv");
     cout << "$PWD = " << ppath  << endl;
     
     ppath = getenv("HOME"); //gets the value of the $HOME
+    if(ppath == NULL)
+      perror("getenv");
     cout << "$HOME = " << ppath << endl;
     
     if(-1==setenv("PWD",ppath,1)) //since the overwrite paramater is non-zero it replaces value of
             cout << "error";                  //$PWD with the value of pPath which is defined as $HOME
     
     ppath = getenv("PWD");  //gets the value of $PWD
+    if(ppath == NULL)
+      perror("getenv");  
     cout << "$PWD = " << ppath << endl;     //the value should now be the same as the value of $HOME
 
 Output 2:
@@ -72,15 +91,21 @@ Output 2:
 Example 3: This example shows what happens when the overwrite paramater is a zero and v_name does have a value.
 
     ppath = getenv("PWD"); //gets the value of $PWD
+    if(ppath == NULL)
+      perror("getenv");
     cout << "$PWD = " << ppath << endl;
     
     ppath = getenv("HOME"); //gets the value of the $HOME
+    if(ppath == NULL)
+      perror("getenv");
     cout << "$HOME = " << ppath << endl;
     
     if(-1==setenv("PWD",ppath,0)) //since the overwrite paramater is non-zero it replaces value of
             cout << "error";                  //$PWD with the value of pPath which is defined as $HOME
     
     ppath = getenv("PWD");  //gets the value of $PWD
+    if(ppath == NULL)
+      perror("getenv");
     cout << "$PWD = " << ppath << endl;     //the value should now be the same as the value of $HOME
 
 Output 3:
@@ -94,12 +119,16 @@ Output 3:
 Example 4: This example shows what happens when the overwrite paramater is a zero *or* a non-zero and v_name is a paramater that is not defined in the environment.
 
     ppath = getenv("HOME"); //gets the value of the $HOME
+    if(ppath == NULL)
+      perror("getenv");
     cout << "$HOME = " << ppath << endl;
 
     if(-1==setenv("random_name",ppath,0)) //since the overwrite paramater is non-zero it replaces value of
             cout << "error";                  //$PWD with the value of pPath which is defined as $HOME
 
     ppath = getenv("random_name");  //gets the value of $PWD
+    if(ppath == NULL)
+      perror("getenv");
     cout << "$random_name = " << ppath << endl;     //the value should now be the same as the value of $HOME
 
 Output 4:
