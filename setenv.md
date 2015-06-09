@@ -24,7 +24,7 @@
 
 **Examples**
 
-``char *ppath;`` is used as a variable in the following examples.
+``char *ppath`` is used as a variable in the following examples.
 
 Example 1: This example shows what happens when the overwrite paramater is a non-zero and v_name has a value.
 
@@ -91,7 +91,7 @@ Output 3:
 
 ///////////////////////////////////////////
 
-Example 4: This example shows what happens when the overwrite paramater is a zero and v_name is a paramater that is not defined in the environment.
+Example 4: This example shows what happens when the overwrite paramater is a zero *or* a non-zero and v_name is a paramater that is not defined in the environment.
 
     ppath = getenv("HOME"); //gets the value of the $HOME
     cout << "$HOME = " << ppath << endl;
