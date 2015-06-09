@@ -22,7 +22,7 @@
 - If v_name is defined and exists, the value of v_name is *not* changed to the v_value. 
 - If v_name was previously undefined, it is given the value of v_value. 
 
-#####Example
+**Examples**
 
 ``char *ppath;`` is used as a variable in the following examples.
 
