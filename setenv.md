@@ -28,7 +28,7 @@
 
 **includes:** `#include <stdlib.h>`
 
-char *getenv(const char *name);
+**declaraton:** `char *getenv(const char *name)`
 
 **returns:**  If successful returns a pointer to the value in the environment, or NULL if there is no match.
 
