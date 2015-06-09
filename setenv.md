@@ -4,8 +4,6 @@
 
 **includes:** `#include <stdlib.h>`
 
-The paramaters are as follows:
-
 **declaraton:** `int setenv(const char *v_name, const char *v_value, int overwrite);`
 
 **returns:** If successful returns zero, otherwise returns -1, with errno set to indicate the cause of the error.
