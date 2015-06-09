@@ -99,7 +99,7 @@ Example 4: This example shows what happens when the overwrite paramater is a zer
     if(-1==setenv("random_name",ppath,0)) //since the overwrite paramater is non-zero it replaces value of
             cout << "error";                  //$PWD with the value of pPath which is defined as $HOME
 
-    ppath = getenv("dom");  //gets the value of $PWD
+    ppath = getenv("random_name");  //gets the value of $PWD
     cout << "$random_name = " << ppath << endl;     //the value should now be the same as the value of $HOME
 
 Output 4:
