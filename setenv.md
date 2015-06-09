@@ -48,8 +48,9 @@ Example 1: This example shows what happens when the overwrite paramater is a non
       perror("getenv");
     cout << "$HOME = " << ppath << endl;    //prints the environment of $PWD
     
-    if(-1==setenv("PWD",ppath,1))           //since the overwrite paramater is non-zero it replaces environment of
-      perror("setenv");                     //$PWD with the value of ppath which is defined by the environment of $HOME
+    if(-1==setenv("PWD",ppath,1))           //since the overwrite paramater is non-zero it replaces environment 
+      perror("setenv");                     //of $PWD with the value of ppath which is defined by the environment 
+                                            //of $HOME
     
     ppath = getenv("PWD");                  //gets the environment of $PWD
     if(ppath == NULL)                       //error checking
@@ -74,8 +75,9 @@ Example 2: This example shows what happens when the overwrite paramater is a non
       perror("getenv");
     cout << "$HOME = " << ppath << endl;
     
-    if(-1==setenv("PWD",ppath,1))           //since the overwrite paramater is non-zero it replaces environment of
-      perror("setenv");                     //$PWD with the value of ppath which is defined by the environment of $HOME 
+    if(-1==setenv("PWD",ppath,1))           //since the overwrite paramater is non-zero it replaces environment 
+      perror("setenv");                     //of $PWD with the value of ppath which is defined by the environment 
+                                            //of $HOME 
     
     ppath = getenv("PWD");                  
     if(ppath == NULL)
@@ -100,8 +102,8 @@ Example 3: This example shows what happens when the overwrite paramater is a zer
       perror("getenv");
     cout << "$HOME = " << ppath << endl;
     
-    if(-1==setenv("PWD",ppath,0))           //since the overwrite paramater is zero it does not replaces environment of $PWD 
-      perror("setenv");                     //with ppath.
+    if(-1==setenv("PWD",ppath,0))           //since the overwrite paramater is zero it does not replaces  
+      perror("setenv");                     //environment of $PWD with ppath.
     
     ppath = getenv("PWD");                
     if(ppath == NULL)
@@ -123,9 +125,10 @@ Example 4: This example shows what happens when the overwrite paramater is a zer
       perror("getenv");
     cout << "$HOME = " << ppath << endl;
 
-    if(-1==setenv("random_name",ppath,0))   //since the overwrite paramater is zero and the the variable $random_name is    
-    perror("setenv");                       //undefined, setenv makes the environment of $random_variable be the value of
-                                            //ppath. If the case where there is a undefined variable the setenv behavous the
+    if(-1==setenv("random_name",ppath,0))   //since the overwrite paramater is zero and the the variable     
+    perror("setenv");                       //$random_name is undefined, setenv makes the environment of 
+                                            //$random_variable be the value of ppath. If the case where
+                                            //there is a undefined variable the setenv behavous the
                                             //same way regardless of a non-zero or zero overwrite paramater. 
                                             
     ppath = getenv("random_name");  //gets the value of $PWD
