@@ -42,7 +42,12 @@ Example 1: This example shows what happens when the overwrite paramater is a non
     if(ppath == NULL)                       //error checking
       perror("getenv");   
     cout << "$PWD = " << ppath << endl;     //prints the environment of $PWD 
-    
+
+Output: of this code would be `$PWD = /class/classes/username/CS100` this is because the char variable ppath is getting the 
+environment from `getenv("PWD")` and the environment of `$PWD` is `/class/classes/username/CS100`. So ppath points to that 
+environment. There is also proper error checking to make sure that `$PWD` has a environment and if it does not the `perror` 
+is called. 
+
     ppath = getenv("HOME");                 //gets the environment of the $HOME
     if(ppath == NULL)                       //error checking
       perror("getenv");
