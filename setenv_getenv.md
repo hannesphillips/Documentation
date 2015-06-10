@@ -72,7 +72,8 @@ This is to change the environment of `$PWD` in this case it take the value that 
 Output: of this code would be `$PWD = /class/classes/username` this is because the char variable ppath is getting the 
 environment from `getenv("PWD")` and the environment of `$PWD` is `/class/classes/username`. So ppath points to that 
 environment. There is also proper error checking to make sure that `$PWD` has a environment and if it does not the `perror` 
-is called. 
+is called. The full output of example 1 is as follows.
+
 Output 1:
 
     $PWD = /class/classes/username/CS100
@@ -86,15 +87,24 @@ Example 2: This example shows what happens when the overwrite paramater is a non
       perror("getenv");
     cout << "$PWD = " << ppath  << endl;    //in this case ppath ="" because the environment of $PWD is not set
     
+Output of the following code will be `$PWD = ` this is because the environment of `$PWD` is set to `""` in this case, it makes the `ppath` point to a empty string. Hence the reason it does not throw an error, however if `$PWD` was not defined an error would be thrown.
+
     ppath = getenv("HOME"); 
     if(ppath == NULL)
       perror("getenv");
     cout << "$HOME = " << ppath << endl;
-    
+
+Output: of this code would be `$HOME = /class/classes/username` this is because the char variable `ppath` is getting the 
+environment from `getenv("HOME")` and the environment of `$HOME` is `/class/classes/username`. So `ppath` points to that 
+environment. There is also proper error checking to make sure that `$HOME` has a environment and if it does not the `perror` 
+is called.
+
     if(-1==setenv("PWD",ppath,1))           //since the overwrite paramater is non-zero it replaces environment 
       perror("setenv");                     //of $PWD with the value of ppath which is defined by the environment 
                                             //of $HOME 
-    
+
+Since the overwrite paramater is 1 it does not matter what the `$PWD` it is set to `ppath` as defined in the earlier example.
+
     ppath = getenv("PWD");                  
     if(ppath == NULL)
       perror("getenv");  
@@ -120,7 +130,9 @@ Example 3: This example shows what happens when the overwrite paramater is a zer
     
     if(-1==setenv("PWD",ppath,0))           //since the overwrite paramater is zero it does not replaces  
       perror("setenv");                     //environment of $PWD with ppath.
-    
+
+Here there is a new case where the overwrite paramater is zero. In this case it does not matter what `ppath` is because the zero flag makes it so that the `$PWD` is not replaced by the `ppath`.
+
     ppath = getenv("PWD");                
     if(ppath == NULL)
       perror("getenv");
@@ -146,6 +158,8 @@ Example 4: This example shows what happens when the overwrite paramater is a zer
                                             //$random_variable be the value of ppath. If the case where
                                             //there is a undefined variable the setenv behavous the
                                             //same way regardless of a non-zero or zero overwrite paramater. 
+                                            
+In this case the overwrite paramater is still zero, but the `v_name` is not declared so this is where the overwrite paramater of zero is helpful. In this case `random_name` is set to `ppath` which is pointing to the environment of `$HOME` which is `/class/classes/username`. 
                                             
     ppath = getenv("random_name");  //gets the value of $PWD
     if(ppath == NULL)
