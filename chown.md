@@ -4,11 +4,11 @@ Documentation on the 'chown()' system call which is used to change ownership and
 
 ##Inclusion
  
-'#include <unistd.h>'
+`#include <unistd.h>`
 
 ##Declaration
 
-'int chown(const char *path, uid_t owner, gid_t group);'
+`int chown(const char *path, uid_t owner, gid_t group);`
 
 ##Return Value
 
@@ -16,11 +16,11 @@ chown() will return 0 if successfully changed owner and group of a file, and wil
 
 ##Description
 
-'chmod()' is used to change the user and group ownership of a file. In the function declaration, the 'path' argument specifies the file, and the 'owner' and 'group' parameters contain numerical values that will symbolize the IDs of the two. The path will be changed to owner and group respectively.
+`chmod()` is used to change the user and group ownership of a file. In the function declaration, the `path` argument specifies the file, and the `owner` and `group` parameters contain numerical values that will symbolize the IDs of the two. The path will be changed to owner and group respectively.
 
 ##Example
 
-'$ cat mychown.c
+$ cat mychown.c
 int main()
 {
 	int flag;
@@ -37,5 +37,4 @@ $ ls -l test.txt
 '
 
 The code above shows a very brief example of how chown works. As you can see, chown runs passing in 'test.txt' as its path, -1 and 62 are the owner and group respectively. Numerical IDs can be used, but in other examples command line arguments, usernames, or other identification tactics. As you can somewhat see, if the program was to be run in a terminal, you can clearly see that 'music' changed to 'cs' indicating that the ownership has changed after the command was run.
-
 
