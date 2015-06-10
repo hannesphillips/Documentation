@@ -144,8 +144,6 @@ Output 3:
     $HOME = /class/classes/username
     $PWD = /class/classes/username/CS100
 
-///////////////////////////////////////////
-
 Example 4: This example shows what happens when the overwrite paramater is a zero *or* a non-zero and v_name is a paramater that is not defined in the environment.
 
     ppath = getenv("HOME"); 
