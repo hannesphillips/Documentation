@@ -52,16 +52,27 @@ is called.
     if(ppath == NULL)                       //error checking
       perror("getenv");
     cout << "$HOME = " << ppath << endl;    //prints the environment of $PWD
-    
+
+Output: of this code would be `$HOME = /class/classes/username` this is because the char variable `ppath` is getting the 
+environment from `getenv("HOME")` and the environment of `$HOME` is `/class/classes/username`. So `ppath` points to that 
+environment. There is also proper error checking to make sure that `$HOME` has a environment and if it does not the `perror` 
+is called. 
+
     if(-1==setenv("PWD",ppath,1))           //since the overwrite paramater is non-zero it replaces environment 
       perror("setenv");                     //of $PWD with the value of ppath which is defined by the environment 
                                             //of $HOME
     
+This is to change the environment of `$PWD` in this case it take the value that the `ppath` is pointing to which in this case is `/class/classes/username` which is also `$HOME`. The overwrite paramater is non-zero so it replaces the environment of `$PWD` to `ppath`
+
     ppath = getenv("PWD");                  //gets the environment of $PWD
     if(ppath == NULL)                       //error checking
       perror("getenv");
     cout << "$PWD = " << ppath << endl;     //the value should now be the same as the value of $HOME
-  
+
+Output: of this code would be `$PWD = /class/classes/username` this is because the char variable ppath is getting the 
+environment from `getenv("PWD")` and the environment of `$PWD` is `/class/classes/username`. So ppath points to that 
+environment. There is also proper error checking to make sure that `$PWD` has a environment and if it does not the `perror` 
+is called. 
 Output 1:
 
     $PWD = /class/classes/username/CS100
