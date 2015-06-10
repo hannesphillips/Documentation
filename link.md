@@ -1,4 +1,4 @@
-#Link
+#Links
 Documentation on linking. These are two calls, link and unlink that are very useful in moving and connecting files. 
 
 ##Link and Unlink
@@ -80,4 +80,14 @@ First the arguments must form paths. To do this, you can add a `./` to the front
 
 Once `./` is added before both arguments, the paths are obtained. After thislink is called on the variables storing the paths. This links the new name to the original file1, essentially renaming it. Then unlink is called to remove the original name and finish the operation.
 
+##SymLink
+Symbolic link creates a soft link between paths. The operation is similar tolink but has inverse behavior. If the file is moved, the link does not follow, rather it remains pointing at the path it was declared to point at. 
+If the a new file is created with the same name, the link will change to point to the new file.
 
+###Inclusion and Return Values
+Identical to link
+
+###Declaration
+`int symlink(const char* oldpath, const char* newpath);`
+
+The operation and handling of symlink are all identical to link but the function after varies as stated above
