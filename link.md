@@ -15,9 +15,18 @@ Zero is returned upon success. -1 is returned in the occurence of an error and e
 
 ###Description
 The call creates a link, known as a hard link, to an existing file.
-This system call is useful for transferring data from one file to next such as in the case of `mv`. If the command is called by `mv file1 file2` and file2 does not exist, then file1 is simply renamed file2.
+
+This system call is useful for transferring data from one file to next such as in the case of `mv`. 
+
+If the command is called by `mv file1 file2` and file2 does not exist, then file1 is simply renamed file2.
+
 This is achieved through the link call. The pointer newpath is equated to oldpath signifying that they both point to the same file. Oldpath is then deallocated to free space, and thus the file1 name, resulting in renaming of file1 without altering its contents at all.
-Unlink is used as the opposite operation of link. The path passed to unlink will be broken from the file, similar to deallocating a standard pointer (paths are essentially pointers). In the case of mv, unlink is used last to sever the link between olpath and the file, which completes the renaming or physical move of the file.
+
+Unlink is used as the opposite operation of link. 
+
+The path passed to unlink will be broken from the file, similar to deallocating a standard pointer (paths are essentially pointers). 
+
+In the case of mv, unlink is used last to sever the link between olpath and the file, which completes the renaming or physical move of the file.
 
 ####Example
 ```
@@ -68,10 +77,15 @@ if(unlink(curr) == -1)
 }
 ```
 
-Once `./` is added before the arguments, the paths are obtained. After this, link is called on the variables storing the paths. This links the new name to the original file1, essentially renaming it. Last, unlink is called to remove the original name and finish the operation.
+Once `./` is added before the arguments, the paths are obtained.
+
+After this, link is called on the variables storing the paths. This links the new name to the original file1, essentially renaming it. Last, unlink is called to remove the original name and finish the operation.
 
 ##SymLink
-Symbolic link creates a soft link between paths. The operation is similar tolink but has inverse behavior. If the file is moved, the link does not follow, rather it remains pointing at the path it was declared to point at. 
+Symbolic link creates a soft link between paths. The operation is similar tolink but has inverse behavior. 
+
+If the file is moved, the link does not follow, rather it remains pointing at the path it was declared to point at. 
+
 If the a new file is created with the same name, the link will change to point to the new file.
 
 ###Inclusion and Return Values
