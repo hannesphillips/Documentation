@@ -12,15 +12,15 @@
 
 ######Nonzero
 
-- Change the existing entry of v_name.
-- If v_name is defined and exists, the value of v_name is changed to the v_value. 
-- If v_name was previously undefined, it is given the value of v_value. 
+- Change the existing entry of `v_name`.
+- If `v_name` is defined and exists, the value of `v_name` is changed to the `v_value`. 
+- If `v_name` was previously undefined, it is given the value of `v_value`. 
 
 ######Zero
   
-- Do not change the existing entry of v_name.
-- If v_name is defined and exists, the value of v_name is *not* changed to the v_value. 
-- If v_name was previously undefined, it is given the value of v_value. 
+- Do not change the existing entry of `v_name`.
+- If `v_name` is defined and exists, the value of `v_name` is *not* changed to the `v_value`. 
+- If `v_name` was previously undefined, it is given the value of `v_value`. 
 
 ##getenv:
 
