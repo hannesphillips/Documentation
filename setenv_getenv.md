@@ -8,20 +8,6 @@
 
 **returns:** If successful returns zero, otherwise returns -1, with errno set to indicate the cause of the error.
 
-**overwrite paramater:**
-
-######Nonzero
-
-- Change the existing entry of `v_name`.
-- If `v_name` is defined and exists, the value of `v_name` is changed to the `v_value`. 
-- If `v_name` was previously undefined, it is given the value of `v_value`. 
-
-######Zero
-  
-- Do not change the existing entry of `v_name`.
-- If `v_name` is defined and exists, the value of `v_name` is *not* changed to the `v_value`. 
-- If `v_name` was previously undefined, it is given the value of `v_value`. 
-
 ##getenv:
 
 [man page - getenv](http://linux.die.net/man/3/getenv)
