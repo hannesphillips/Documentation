@@ -158,8 +158,8 @@ block is `$HOME = /class/classes/username`.
                                             //same way regardless of a non-zero or zero overwrite paramater. 
                                             
 In this case the `overwrite` paramater is still zero, but the `v_name` is not declared so this is where the `overwrite` paramater of zero is helpful. In this case `random_name` is set to `ppath` which is pointing to the environment of `$HOME` which is `/class/classes/username`. 
-                                            
-    ppath = getenv("random_name");  //gets the value of $PWD
+
+    ppath = getenv("random_name");                  //gets the value of $PWD
     if(ppath == NULL)
       perror("getenv");
     cout << "$random_name = " << ppath << endl;     //the value should now be the same as the value of $HOME
