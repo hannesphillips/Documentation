@@ -13,22 +13,15 @@ Documentation on linking. These are two calls, link and unlink that are very use
 ###Return
 Zero is returned upon success. -1 is returned in the occurence of an error and errno is set properly
 
-###Description
-The call creates a link, known as a hard link, to an existing file.
-
-This system call is useful for transferring data from one file to next such as in the case of `mv`. 
+###Example
+This system call is useful for linking data from one file to another such as in the case of `mv`. 
 
 If the command is called by `mv file1 file2` and file2 does not exist, then file1 is simply renamed file2.
 
-This is achieved through the link call. The pointer newpath is equated to oldpath signifying that they both point to the same file. Oldpath is then deallocated to free space, and thus the file1 name, resulting in renaming of file1 without altering its contents at all.
+Link connects to the paths by a hard link, essentially having two pointers point to the same data.
 
-Unlink is used as the opposite operation of link. 
+In the case of mv, unlink is used to remove the link between olpath and the file, which completes the renaming and/or physical move of the file.
 
-The path passed to unlink will be broken from the file, similar to deallocating a standard pointer (paths are essentially pointers). 
-
-In the case of mv, unlink is used last to sever the link between olpath and the file, which completes the renaming or physical move of the file.
-
-####Example
 ```
 if(argc != 3)
 {
@@ -79,19 +72,14 @@ if(unlink(curr) == -1)
 
 Once `./` is added before the arguments, the paths are obtained.
 
-After this, link is called on the variables storing the paths. This links the new name to the original file1, essentially renaming it. Last, unlink is called to remove the original name and finish the operation.
+Link is called on the paths to form the link between them, linking the original file to the new path (name).
 
-##SymLink
-Symbolic link creates a soft link between paths. The operation is similar tolink but has inverse behavior. 
+```
+if(unlink(curr) == -1)
+{
+	perror("unlink");
+	exit(1);
+}
+```
 
-If the file is moved, the link does not follow, rather it remains pointing at the path it was declared to point at. 
-
-If the a new file is created with the same name, the link will change to point to the new file.
-
-###Inclusion and Return Values
-Identical to link
-
-###Declaration
-`int symlink(const char* oldpath, const char* newpath);`
-
-The operation and handling of symlink are all identical to link but the function after varies as stated above
+Last, unlink is called to remove the connection of the old path and the file, finishing the operation.

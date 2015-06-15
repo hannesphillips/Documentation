@@ -25,13 +25,16 @@ O_NONBLOCK flag saves extra calss to fcntl to produce the same result...
 O_CLOEXEC flag sets the close-on-exec flag to the file descriptors...
 
 
-The array pipefd[2] returns 2 file descriptors linking the ends of the pipe, or data path. pipefd[0] is the read end and pipefd[1] is the write end. When data is written to pipefd[1] the pipe is buffered by the kernel until the data is read from pipefd[0] signalling the data has successfully moved throough the pipe.
+The array pipefd[2] returns 2 file descriptors linking the ends of the pipe, or data path.
 
-Pipe is a key call in performing any operations where multiple processes need to communicate with each other. This is essential for I/O redirection. A basic operation, shown in the man pipe page, to provide rough understanding is the output to standard out in the child process from data in the parent.
+pipefd[0] is the read end
+
+pipefd[1] is the write end
+
+Pipe is a key call in performing any operations where multiple processes need to communicate with each other.
 
 ###Example:
-
-The steps are setting up the pipefd[2] array, getting the data to output, creating the pipe, creating the child process, closing unused ends, reading data from one to end to the other for output, and lastly closing the pipe and child.
+Declaration of pipefd array and necessary variables and checking the proper amount of arguments.
 
 ```
 pipefd[2];
@@ -42,18 +45,30 @@ if(argc != 2) {
 	fprintf(stderr, "Usage: %s <string>\n", argv[0]);
 	exit(1);
 }
+```
 
+Establishes the pipe, aka data tunnel
+
+```
 if(pipe(pipefd) == -1) {		// Creates and error checks the pipe
 	perror("pipe");	
 	exit(1);
 }
+```
 
+Pipes are used to communicate through processes, so here the child process to which we will communicate is forked.
+
+```
 child = fork();
 if(child == -1) {
 	perror("fork");
 	exit(1);
 }
+```
 
+In the child, the write end of the pipe is closed because we are only reading on this side.
+
+```
 if(child == 0) {
 	close(pipefd[1];		// Closes unused write end
 
@@ -64,7 +79,12 @@ if(child == 0) {
 	close(pipefd[0]);
 	exit(EXIT_SUCCESS);
 }
+```
 
+The function then reads from the read end of the pipe and outputs to standard out as long as the data is does not cause an error in read.
+
+
+```
 else {
 	close(pipefd[0]);
 	write(pipefd[1], argv[1], strlen(argv[1]));
@@ -74,6 +94,8 @@ else {
 }
 ```
 
-You can see in the example that once the pipe is created the fork creates the child there is a duplicate of the pipe, cloned to the child. Depending on the operation to occur an end of the pipe is closed in the child since the communication happens one direction at a time. Once the pipe connection is established between the processes, data transfer can occur by writing to pipefd[1] and waiting for the buffer or reading from pipefd[0].
+Back in the parent, the read end of the pipe is closed because the parent is writing to the child.
 
-This precedent is the same basis for redirection. For example, output redirection to a file. The function is executed normally in its process with some form of `exec`. The output of the function is them written to pipefd[1] instead of standard output. The read end, pipefd[0] is then used to fill the content of an opened file in another process, thus linking the processes by thefile descriptor data path.
+The write function sends the command line argument array `argv[1]` and the length through the pipe.
+
+Lastly, the write end of the pipe is closed, the child is waited for, and the function exits with a success status.
